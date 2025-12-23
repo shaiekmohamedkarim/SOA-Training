@@ -1,64 +1,161 @@
-# 🔐 Workshop SOA — Sécurisation d’un Service Web RESTful
+# 🧠 GraphQL Workshop — Service-Oriented Architecture (SOA)
 
-**Module : Architecture Orientée Services (SOA)**  
-**Année Universitaire : 2025–2026**  
-**École : ESPRIT – École d’Ingénieurs**
 
 ---
 
-## 🎯 Objectifs du workshop
+## 🎯 Workshop Objectives
 
-- Comprendre les principes de **sécurisation des services web RESTful**
-- Mettre en œuvre une **authentification basée sur les jetons (Token / JWT)**
-- Gérer les **autorisations d’accès** aux ressources REST
-- Appliquer les bonnes pratiques de sécurité dans une architecture SOA
-- Sécuriser des services REST développés avec **JAX-RS**
+The main goal of this workshop is to **design and develop a GraphQL web service** for managing the university’s academic modules.
 
----
+By the end of the workshop, students will be able to:
 
-## 📚 Pré-requis
-
-- Connaissances en **Java**
-- Bases des **services web REST**
-- Notions sur **HTTP** et les codes de réponse
-- Compréhension générale de l’architecture SOA
+1. Understand the difference between **REST and GraphQL** (philosophy, advantages, and limitations).  
+2. Model the **GraphQL schema** representing the business entities.  
+3. Implement **GraphQL operations** (queries and mutations).  
+4. Set up a **GraphQL API using a Java backend**.  
+5. Test and consume the API using **Postman** or **GraphiQL**.
 
 ---
 
-## 🛠️ Outils à installer
-- [**JDK (Java Development Kit)**](https://www.oracle.com/in/java/technologies/downloads/)
-- [**IntelliJ IDEA**](https://www.jetbrains.com/idea/download/?section=windows)
-- [**Apache Maven**](https://maven.apache.org)
-- [**Serveur d’applications**](https://tomcat.apache.org)
-- [**Postman** ](https://tomcat.apache.org)ou tout autre outil de test d’API REST
-- Accès à un [**outil de décodage JWT**](https://www.jwt.io)
+## 🏗️ Project Context
+
+The university aims to modernize its academic management system to improve the experience for students and faculty members.  
+The project focuses on centralizing data and exposing core functionality through a **GraphQL API**, as an evolution from REST services.
+
+The main entities are:
+
+- **Module**  
+- **Teaching Unit (Unité d’Enseignement / UE)**  
+
+An enumeration is used to classify module types:
+
+| TypeModule | Description |
+|-------------|-------------|
+| **TRANSVERSAL** | Common to several programs (e.g., Languages) |
+| **PROFESSIONAL** | Focused on professional skills (e.g., projects, internships) |
+| **RESEARCH** | Dedicated to research activities (e.g., dissertations, theses) |
 
 ---
 
-## 📂 Ressources
+## ⚙️ Features to Implement
 
-- [Énoncé officiel de l’atelier (PDF)](https://github.com/badi3a/SOA-Training/blob/workshop-security/Atelier5-JAX-RS%20Security.pdf)
-- [Projet REST CRUD réalisé dans les ateliers précédents](https://github.com/badi3a/SOA-Training/tree/workshop-security/Gestion_UE_Etudiant)
-- [Supports de cours JWT](https://github.com/badi3a/SOA-Training/blob/workshop-security/Cours_JWT.pdf)
+### 🧩 A. Modules
 
-📎 **Support du workshop** :  
-➡️ [*Atelier 5 – Sécuriser un service web RESTful (JAX-RS)*](https://github.com/badi3a/SOA-Training/blob/workshop-security/Atelier5-JAX-RS%20Security.pdf)
+1. Retrieve the list of all modules.  
+2. Create a **new module** (returns `Boolean`).  
+3. Update an existing module (by ID).  
+4. Retrieve modules by **type**.  
+5. Retrieve a module by **matricule**.  
+6. Delete a module by **matricule**.
+
+---
+
+### 🧱 B. Teaching Units (UE)
+
+1. Create a **new teaching unit**.  
+2. Retrieve a teaching unit by its **unique code**.  
+3. Retrieve all teaching units for a given **domain**.  
+4. Retrieve all teaching units for a given **semester**.  
+5. Update an existing teaching unit (by code).  
+6. Delete a teaching unit (by code).
 
 ---
 
-## 📦 Travail demandé
+## 🧮 Task Requirements
 
-Les étudiants doivent :
+A preconfigured Java project is provided, containing:
 
-- Intégrer un **mécanisme d’authentification par token**
-- Mettre en place la **sécurisation des ressources REST**
-- Gérer l’accès aux services à l’aide des **en-têtes HTTP**
-- Tester les scénarios d’accès autorisés et non autorisés
-- Vérifier le comportement du service en cas de jeton valide, invalide ou expiré
+- **Entity classes** (`Module`, `Unite_enseignement`, etc.)  
+- **Business classes** implementing domain logic
+
+You are required to:
+
+1. **Implement GraphQL queries and mutations** as described above.  
+2. **Define the GraphQL schema** (`schema.graphqls`) representing the data model.  
+3. **Configure the GraphQL server**   
+4. **Test operations** using Postman or GraphiQL.  
+5. **Observe and explain** what happens when multiple queries are executed within the same GraphQL request.
 
 ---
+
+
+## 📚 Project Structure
+
+```
+📦 graphql-workshop
+ ┣ 📂 src
+ ┃ ┣ 📂 main
+ ┃ ┃ ┣ 📂 java
+ ┃ ┃ ┃ ┣ 📂 com.esprit.graphql
+ ┃ ┃ ┃ ┃ ┣ 📂 entity
+ ┃ ┃ ┃ ┃ ┣ 📂 business
+ ┃ ┃ ┃ ┃ ┣ 📂 graphql
+ ┃ ┃ ┃ ┃ ┣ 📜 GraphQLEndPoint.java
+ ┃ ┃ ┣ 📂 resources
+ ┃ ┃ ┃ ┣ 📜 schema.graphqls
+ ┣ 📜 pom.xml
+ ┣ 📜 README.md
+```
+
 ---
 
-## 🏫 Cadre pédagogique
-### Enseignante:- **[Badia Bouhdid](https://www.linkedin.com/in/badiabouhdid)**
-Cet atelier est dispensé dans le cadre du **module Architecture Orientée Services (SOA)**  à l’[**École d’Ingénieurs ESPRIT**.](https://www.esprit.tn)
+## 🚀 Implementation Steps
+
+1. **Analyze** the existing entities and business logic.  
+2. **Create GraphQL resolvers**:  
+   - `QueryResolver` for read operations  
+   - `MutationResolver` for write operations  
+3. **Define the GraphQL schema** (`schema.graphqls`).  
+4. **Configure the GraphQL server** within Spring Boot.  
+5. **Test** queries and mutations using Postman or GraphiQL.  
+6. **Document** your tests and observations.
+
+---
+
+## 🧪 Example GraphQL Operations
+
+### Query Example
+```graphql
+query {
+  allModules {
+    code
+    name
+    type
+  }
+}
+```
+
+### Mutation Example
+```graphql
+mutation {
+  createModule(code: "M001", name: "Web Services", type: PROFESSIONAL)
+}
+```
+
+---
+
+## 💡 To Explore Further
+
+- REST vs GraphQL: structural and network differences.  
+- Strong typing and introspection in GraphQL.  
+- Resolver pattern and dependency injection.  
+- Combining multiple queries in a single GraphQL request.
+
+---
+
+## 🧾 Deliverables
+
+- Complete project folder (source code + schema + tests).  
+- Summary report (PDF) including:  
+  - Entity and schema descriptions.  
+  - Example queries and mutations.  
+  - Postman test screenshots.  
+  - Observations about GraphQL flexibility.
+
+---
+
+## 👩‍🏫 Supervision
+
+- **Module Coordinator:** Maroua Douiri  
+- **Workshop Instructors:** Badiaa Bouhdid, Akrem Khémiri, Sarra Abidi, Donia Riahi  
+- **Duration:** 6 hours (Hands-on Workshop)
