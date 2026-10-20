@@ -52,8 +52,24 @@ private UniteEnseignementBusiness uniteEnseignementBusiness=new UniteEnseignemen
 
     // Mettre à jour un module
     public boolean updateModule(String matricule, Module updatedModule) {
+        if (updatedModule == null) {
+            return false;
+        }
+
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getMatricule().equals(matricule)) {
+                UniteEnseignement ue = updatedModule.getUniteEnseignement();
+                if (ue != null) {
+                    UniteEnseignement existingUE = uniteEnseignementBusiness.getUEByCode(ue.getCode());
+                    if (existingUE == null) {
+                        return false;
+                    }
+                    updatedModule.setUniteEnseignement(existingUE);
+                } else {
+                    updatedModule.setUniteEnseignement(modules.get(i).getUniteEnseignement());
+                }
+
+                updatedModule.setMatricule(matricule);
                 modules.set(i, updatedModule);
                 return true;
             }
